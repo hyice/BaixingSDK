@@ -25,6 +25,9 @@
     // header
     for (id key in [header allKeys]) {
         id value = [header bx_safeObjectForKey:key];
+        if (!value || ([value isKindOfClass:[NSString class]] && [value length] == 0)) {
+            continue;
+        }
         [manager.requestSerializer setValue:value forHTTPHeaderField:key];
     }
     
@@ -53,6 +56,9 @@
     // header
     for (id key in [header allKeys]) {
         id value = [header bx_safeObjectForKey:key];
+        if (!value || ([value isKindOfClass:[NSString class]] && [value length] == 0)) {
+            continue;
+        }
         [manager.requestSerializer setValue:value forHTTPHeaderField:key];
     }
     
