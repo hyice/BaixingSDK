@@ -17,10 +17,10 @@
 + (void)getByUrl:(NSString *)url
           header:(NSDictionary *)header
       parameters:(NSDictionary *)parameters
-         success:( void (^) (id operation, id data) )success
-         failure:( void (^) (id operation, NSError *error) )failure;
+         success:( void (^) (NSURLSessionDataTask *task, id data) )success
+         failure:( void (^) (NSURLSessionDataTask *task, NSError *error) )failure;
 {    
-    AFHTTPRequestOperationManager *manager = [BXNetworkManager shareManager].afManager;
+    AFHTTPSessionManager *manager = [BXNetworkManager shareManager].sessionManager;
     
     // header
     for (id key in [header allKeys]) {
@@ -32,26 +32,20 @@
     }
     
     // send request
-    [manager GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        // success callback
-        success(operation, responseObject);
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        // failure callback
-        failure(operation, error);
-        
+    [manager GET:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        success(task, responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(task, error);
     }];
 }
 
 + (void)postByUrl:(NSString *)url
            header:(NSDictionary *)header
        parameters:(NSDictionary *)parameters
-          success:( void (^) (id operation, id data) )success
-          failure:( void (^) (id operation, NSError *error) )failure;
+          success:( void (^) (NSURLSessionDataTask *task, id data) )success
+          failure:( void (^) (NSURLSessionDataTask *task, NSError *error) )failure;
 {
-    AFHTTPRequestOperationManager *manager = [BXNetworkManager shareManager].afManager;
+    AFHTTPSessionManager *manager = [BXNetworkManager shareManager].sessionManager;
     
     // header
     for (id key in [header allKeys]) {
@@ -63,16 +57,10 @@
     }
     
     // send request
-    [manager POST:url parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        // success callback
-        success(operation, responseObject);
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        // failure callback
-        failure(operation, error);
-        
+    [manager POST:url parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        success(task, responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(task, error);
     }];
 }
 

@@ -15,15 +15,13 @@ typedef enum {
     BX_POST
 } BX_HTTP_METHOD;
 
-@class BXError, AFHTTPRequestOperationManager;
+@class BXError, AFHTTPSessionManager;
 
 @interface BXNetworkManager : NSObject
 
-@property (nonatomic) AFHTTPRequestOperationManager *afManager;
+@property (nonatomic) AFHTTPSessionManager *sessionManager;
 
 + (instancetype)shareManager;
-
-- (void)logEnable:(BOOL)enable;
 
 - (BOOL)isReachable;
 

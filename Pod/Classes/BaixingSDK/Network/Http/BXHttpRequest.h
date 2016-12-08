@@ -13,13 +13,13 @@
 + (void)getByUrl:(NSString *)url
           header:(NSDictionary *)header
       parameters:(NSDictionary *)parameters
-         success:( void (^) (id operation, id data) )success
-         failure:( void (^) (id operation, NSError *error) )failure;
+         success:( void (^) (NSURLSessionDataTask *task, id data) )success
+         failure:( void (^) (NSURLSessionDataTask *task, NSError *error) )failure;
 
 + (void)postByUrl:(NSString *)url
            header:(NSDictionary *)header
        parameters:(NSDictionary *)parameters
-          success:( void (^) (id operation, id data) )success
-          failure:( void (^) (id operation, NSError *error) )failure;
+          success:( void (^) (NSURLSessionDataTask *task, id data) )success
+          failure:( void (^) (NSURLSessionDataTask *task, NSError *error) )failure;
 
 @end
